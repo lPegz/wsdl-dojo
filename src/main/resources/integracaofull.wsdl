@@ -16,6 +16,7 @@
                     http://schemas.xmlsoap.org/wsdl/http/
                     http://www.w3.org/2001/XMLSchema-instance
                     http://schemas.xmlsoap.org/wsdl/soap12/">
+    <!-- obterCotacaoVeiculo -->
     <wsdl:message name="obterCotacaoVeiculoRequest">
         <wsdl:part name="marcaVeiculo" type="xsd:string"/>
     </wsdl:message>
@@ -44,7 +45,39 @@
     </wsdl:binding>
     <wsdl:service name="service">
         <wsdl:port name="binding_SOAP10" binding="tns:binding_SOAP10">
-            <soap:address location="http://lnxcit017514:8000/cotacaoVeiculo"/>
+            <soap:address location="http://localhost:8000/cotacaoVeiculo"/>
+        </wsdl:port>
+        <wsdl:port name="binding_SOAP10_1" binding="tns:binding_SOAP10_1">
+            <soap:address location="http://localhost:8000/cotacaoVeiculoInternacional"/>
         </wsdl:port>
     </wsdl:service>
+
+    <!--  -->
+    <wsdl:message name="obterCotacaoVeiculoInternacionalRequest">
+        <wsdl:part name="marcaVeiculo" type="xsd:string"/>
+        <wsdl:part name="currency" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="obterCotacaoVeiculoInternacionalResponse">
+        <wsdl:part name="valorCotacao" type="xsd:double" />
+    </wsdl:message>
+    <wsdl:portType name="obterCotacaoByCurrencyQueryImp">
+        <wsdl:operation name="obterCotacaoInternacional">
+            <wsdl:input message="tns:obterCotacaoVeiculoInternacionalRequest" />
+            <wsdl:output message="tns:obterCotacaoVeiculoInternacionalResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding type="tns:obterCotacaoByCurrencyQueryImp" name="binding_SOAP10_1">
+        <soap:binding style="document"
+                      transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="obterCotacaoInternacional">
+            <soap:operation soapAction="http://example.com/cotacaoVeiculoInternacional" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
 </wsdl:definitions>
