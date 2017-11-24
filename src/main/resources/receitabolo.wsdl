@@ -1,0 +1,14 @@
+<definitions>
+    <types>
+        Declarações dos tipos existentes
+    </types>
+    <message>
+        definição dos dados a serem enviados/recebidos
+    </message>
+    <portType>
+        lista de operações
+    </portType>
+    <binding>
+        protocolo e especificação de dados
+    </binding>
+</definitions>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+<wsdl:definitions targetNamespace="http://www.example.com/cotacaoVeiculo"
+                  xmlns:tns="http://www.example.com/cotacaoVeiculo"
+
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xsi:schemaLocation="http://www.example.com/cotacaoVeiculo
+                    http://schemas.xmlsoap.org/wsdl/
+                    http://www.w3.org/2001/XMLSchema
+                    http://schemas.xmlsoap.org/wsdl/soap/
+                    http://schemas.xmlsoap.org/wsdl/http/
+                    http://www.w3.org/2001/XMLSchema-instance
+                    http://schemas.xmlsoap.org/wsdl/soap12/">
+    <wsdl:message name="obterCotacaoVeiculoRequest">
+        <wsdl:part name="marcaVeiculo" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="obterCotacaoVeiculoResponse">
+        <wsdl:part name="valorCotacao" type="xsd:double" />
+    </wsdl:message>
+    <wsdl:portType name="obterCotacaoQueryImp">
+        <wsdl:operation name="obterCotacao">
+            <wsdl:input message="tns:obterCotacaoVeiculoRequest" />
+            <wsdl:output message="tns:obterCotacaoVeiculoResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding type="tns:obterCotacaoQueryImp" name="binding_SOAP10">
+        <soap:binding style="document"
+                      transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="obterCotacao">
+            <soap:operation soapAction="http://example.com/cotacaoVeiculo" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="service">
+        <wsdl:port name="binding_SOAP10" binding="tns:binding_SOAP10">
+            <soap:address location="http://lnxcit017514:8000/cotacaoVeiculo"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
